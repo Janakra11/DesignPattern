@@ -45,6 +45,7 @@ public class ShapeFactory {
 
 public class CreationalFactoryDesignPattern {
 //creational design pattern to create an object using factory class
+//It just Defines an Interface or Abstract class for creating object but let subclass to decide which to instantiate.
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		ShapeFactory shapeFactory = new ShapeFactory();

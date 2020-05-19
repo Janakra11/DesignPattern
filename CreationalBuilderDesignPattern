@@ -1,0 +1,70 @@
+package com.pack.design.pattern;
+class Employee{
+	private int empId;
+	private String name;
+	private String designation;
+	private String address;
+	
+	public Employee(int empId, String name, String designation, String address) {
+		super();
+		this.empId = empId;
+		this.name = name;
+		this.designation = designation;
+		this.address = address;
+	}
+
+	@Override
+	public String toString() {
+		return "Employee [empId=" + empId + ", name=" + name + ", designation=" + designation + ", address=" + address
+				+ "]";
+	};
+}
+
+class EmployeeBuilder{
+	private int empId;
+	private String name;
+	private String designation;
+	private String address;
+	
+	public EmployeeBuilder setEmpId(int empId)
+	{
+		this.empId = empId;
+		return this;
+	}
+	
+	public EmployeeBuilder setName(String name)
+	{
+		this.name = name;
+		return this;
+	}
+	
+	public EmployeeBuilder setDesignation(String designation)
+	{
+		this.designation = designation;
+		return this;
+	}
+	
+	public EmployeeBuilder setAddress(String address)
+	{
+		this.address = address;
+		return this;
+	} 
+	
+	public Employee getEmployee()
+	{
+		return new Employee(empId, name, designation, address);
+	}
+}
+
+public class CreationalBuilderDesignPattern {
+//creational builder design pattern
+	
+	public static void main(String args[])
+	{
+		Employee e1= new EmployeeBuilder().setEmpId(101).setName("abc").getEmployee();
+		System.out.println(e1);	
+		
+		Employee e2= new EmployeeBuilder().setEmpId(102).setName("James").setDesignation("Sr. System Enginner").getEmployee();
+		System.out.println(e2);	
+	}
+}
