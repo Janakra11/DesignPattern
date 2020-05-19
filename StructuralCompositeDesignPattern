@@ -1,0 +1,100 @@
+package com.pack.design.pattern;
+
+import java.util.ArrayList;
+import java.util.List;
+
+interface Component{
+	void showPrize();
+}
+
+class Leaf implements Component
+{
+	int prize;
+	String name;
+	
+	public void showPrize()
+	{
+		System.out.println("Name:"+name+"\t Prize:"+prize);
+	}
+	
+	public Leaf(int prize, String name)
+	{
+		super();
+		this.prize = prize;
+		this.name = name;
+	}
+}
+
+class Composite implements Component
+{
+	String name;
+	List<Component> components = new ArrayList();
+	
+	public void addComponent(Component c)
+	{
+		components.add(c);
+	}
+	
+	public void showPrize()
+	{
+		System.out.println("Component Name is "+name);
+		
+		for (Component component: components) {
+			component.showPrize();
+		}
+	}
+	
+	public Composite(String name)
+	{
+		super();
+		this.name = name;
+	}
+}
+
+
+public class StructuralCompositeDesignPattern {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		//Leaf Object
+		Component hd = new Leaf(4000, "Hard Drive");
+		
+		Component mouse = new Leaf(500, "DELL Mouse");
+		
+		Component monitor = new Leaf(5000, "LG Monitor");
+		
+		Component ram = new Leaf(2000, "CGATE RAM");
+		
+		Component cpu = new Leaf(5000, "ATX CPU");
+		
+		Component keyboard = new Leaf(800, "Dell KeyBoard");
+		
+		//Component Object
+		Composite peripheral= new Composite("PheriPheral Devices");
+		
+		Composite mb = new Composite("Mother Board");
+		
+		Composite cabinet = new Composite("ATX Cabinet"); 
+		
+		Composite computer = new Composite("Computer");
+		
+		peripheral.addComponent(mouse);
+		peripheral.addComponent(monitor);
+		peripheral.addComponent(keyboard);
+		
+		cabinet.addComponent(hd);
+		cabinet.addComponent(mb);
+		
+		mb.addComponent(cpu);
+		mb.addComponent(ram);
+		
+		computer.addComponent(peripheral);
+		computer.addComponent(cabinet);
+		
+		ram.showPrize();
+		peripheral.showPrize();
+		computer.showPrize();
+	}
+
+}
