@@ -1,0 +1,58 @@
+package com.pack.design.pattern;
+
+interface Pen
+{
+	void write(String msg);
+}
+
+class PilotPen{
+	public void write(String msg)
+	{
+		System.out.println(msg);
+	}
+}
+
+class PenAdapter implements Pen
+{
+    PilotPen pp = new PilotPen();
+    
+	@Override
+	public void write(String msg) {
+		// TODO Auto-generated method stub
+		pp.write(msg);
+	}
+}
+
+class AssignmentWork
+{
+	private Pen p;
+	
+	public Pen getP()
+	{StructuralAdapterDesignPattern
+		return p;
+	}
+	
+	public void setP(Pen p)
+	{
+		this.p = p;
+	}
+	
+	public void writeAssignment(String str)
+	{
+		p.write(str);
+	}
+} 
+public class StructuralAdapterDesignPattern {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+        Pen p = new PenAdapter();
+        
+        AssignmentWork aw = new AssignmentWork();
+        
+        aw.setP(p);
+        aw.writeAssignment("I will excieted to write an Assignment");
+        		
+	}
+
+}
