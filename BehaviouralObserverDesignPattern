@@ -1,0 +1,86 @@
+package com.pack.design.pattern;
+
+import java.util.ArrayList;
+import java.util.List;
+
+class Subscriber
+{
+	private String name;
+	private Channel channel = new Channel();
+	
+	public void update()
+	{
+		System.out.println("Hey "+name+" video is uploaded");
+	}
+	
+	public void subscriberChannel(Channel ch)
+	{
+		channel = ch;
+	}
+
+	public Subscriber(String name) {
+		super();
+		this.name = name;
+	}
+}
+
+
+class Channel
+{
+	List<Subscriber> subs = new ArrayList<>();
+    String title;
+	
+	public void subcriber(Subscriber sub)
+	{
+		subs.add(sub);
+	}
+	
+	public void unSubscriber(Subscriber sub)
+	{
+		subs.remove(sub);
+	}
+	
+	public void notifySubscriber()
+	{
+		for(Subscriber sub: subs)
+		{
+			sub.update();
+		}
+	}
+	
+	public void upload(String title)
+	{
+		this.title = title;
+		notifySubscriber();
+	}
+}
+public class BehaviouralObserverDesignPattern {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+     Channel ch = new Channel();
+     Subscriber sub1 = new Subscriber("Akshay");
+     Subscriber sub2 = new Subscriber("Sonam");
+     Subscriber sub3 = new Subscriber("Harsh");
+     Subscriber sub4 = new Subscriber("Amar");
+     Subscriber sub5 = new Subscriber("Amit");
+     Subscriber sub6 = new Subscriber("Rohan");
+     
+     ch.subcriber(sub1);
+     ch.subcriber(sub2);
+     ch.subcriber(sub3);
+     ch.subcriber(sub4);
+     ch.subcriber(sub5);
+     ch.subcriber(sub6);
+     
+     sub1.subscriberChannel(ch);
+     sub2.subscriberChannel(ch);
+     sub3.subscriberChannel(ch);
+     sub4.subscriberChannel(ch);
+     sub5.subscriberChannel(ch);
+     sub6.subscriberChannel(ch);
+     
+     ch.upload("Added DataStructure video");
+	}
+
+}
