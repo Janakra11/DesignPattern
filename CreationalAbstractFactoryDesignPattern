@@ -1,0 +1,167 @@
+package com.pack.design.pattern;
+
+import org.w3c.dom.views.AbstractView;
+
+/*
+ * It just define an Interface or Abstract class for creating families of related or dependent
+ * object without specifying their concrete subclass.
+ */
+interface Shape1
+{
+	void draw();
+}
+
+class Circle1 implements Shape1
+{
+
+	@Override
+	public void draw() {
+		// TODO Auto-generated method stub
+		System.out.println("inside Circle draw() method");
+	}
+	
+}
+
+class Rectangle1 implements Shape1
+{
+	@Override
+	public void draw() {
+		// TODO Auto-generated method stub
+		System.out.println("inside Rectangle1 draw() method");
+	}
+}
+
+class Triangle implements Shape1
+{
+	@Override
+	public void draw() {
+		// TODO Auto-generated method stub
+		System.out.println("inside Triangle draw() method");
+	}	
+}
+
+interface Color
+{
+	void fill();
+}
+
+
+class Red implements Color
+{
+	@Override
+	public void fill() {
+		// TODO Auto-generated method stub
+		System.out.println("Filled in red Color");
+	}
+}
+
+class Green implements Color
+{
+	@Override
+	public void fill() {
+		// TODO Auto-generated method stub
+		System.out.println("Filled in Green Color");
+	}
+}
+
+class Yellow implements Color
+{
+	@Override
+	public void fill() {
+		// TODO Auto-generated method stub
+		System.out.println("Filled in Yellow Color");
+	}	
+}
+
+abstract class AbstractFactory {
+	abstract Shape1 getShape(String shapeType) ;
+	abstract Color getColor(String colorName);
+}
+
+class ShapeFactory1 extends AbstractFactory {
+	@Override
+	public Shape1 getShape(String shapeType) {
+		if (shapeType.equalsIgnoreCase("RECTANGLE")) {
+			return new Rectangle1();
+		} else if (shapeType.equalsIgnoreCase("TRIANGLE")) {
+			return new Triangle();
+		} else if (shapeType.equalsIgnoreCase("CIRCLE")) {
+			return new Circle1();
+		}
+		return null;
+	}
+
+	@Override
+	Color getColor(String colorName) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+}
+
+class ColorFactory extends AbstractFactory
+{
+
+	@Override
+	Shape1 getShape(String shapeType) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	Color getColor(String colorName) {
+		if (colorName.equalsIgnoreCase("RED")) {
+			return new Red();
+		}
+		else if (colorName.equalsIgnoreCase("GREEN")) {
+			return new Green();
+		}
+		else if (colorName.equalsIgnoreCase("YELLOW")) {
+			return new Yellow();
+		}
+		return null;
+	}
+}
+
+class FactoryProducer{
+	public static AbstractFactory getFactory(String factoryType)
+	{
+		if(factoryType.equals("Shape"))
+		{
+			return new ShapeFactory1();
+		}
+		else if(factoryType.equals("Color"))
+		{
+			return new ColorFactory();
+		}
+		else
+		{
+			return null;
+		}
+	}
+}
+
+public class CreationalAbstractFactoryDesignPattern {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+        AbstractFactory factoryProducer = FactoryProducer.getFactory("Shape");
+    	Shape1 shape = factoryProducer.getShape("RECTANGLE");
+    	shape.draw();
+    	
+        Shape1 shape1 = factoryProducer.getShape("TRIANGLE");
+        shape1.draw();
+        
+        Shape1 shape2 = factoryProducer.getShape("CIRCLE");
+        shape2.draw();
+   
+        AbstractFactory factoryProducer1 = FactoryProducer.getFactory("Color");
+        Color color = factoryProducer1.getColor("RED");
+        color.fill();
+        
+        Color color1 = factoryProducer1.getColor("GREEN");
+        color1.fill();
+        
+        Color color2 = factoryProducer1.getColor("YELLOW");
+        color2.fill();
+	}
+}
