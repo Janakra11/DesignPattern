@@ -1,0 +1,64 @@
+package com.pack.design.pattern;
+
+/*
+ * Just Defines a class that has only one instance and provide the global point of access.
+ * There are two forms of Singleton design pattern:
+ * 1]Early instantiation:
+ *    Cretaion of instance at load time
+ * 2]Lazy instantiation:
+ *    Cration of instance when it is required.
+ */
+//Early Instantiation
+class A {
+	private static A obj = new A();
+	// Early instantiation will be created at load time
+
+	private A() {
+	}
+
+	public static A getA() {
+		return obj;
+	}
+}
+
+//Lazy instantiation 
+class B {
+	private static B obj;
+
+	private B() {
+	}
+
+	public static B getB() {
+		if (obj == null) {
+			return obj = new B();
+		} else {
+			return obj;
+		}
+	}
+
+	/*
+	 * If you want synchronized object use below code 
+	 * public static synchronized B getB() 
+	 * { 
+	 *      if(obj == null) 
+	 *      { 
+	 *          return obj = new B();
+	 *      } 
+	 *      else 
+	 *      { 
+	 *          return obj; 
+	 *      } 
+	 *  }
+	 */
+}
+
+public class CreationalSingletonDesignPattern {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		A a = A.getA();
+
+		B b = B.getB();
+	}
+
+}
