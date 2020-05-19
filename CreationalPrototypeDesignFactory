@@ -1,0 +1,97 @@
+package com.pack.design.pattern;
+
+import java.util.ArrayList;
+import java.util.List;
+
+class Book {
+	private int bookId;
+	private String bookName;
+
+	public int getBookId() {
+		return bookId;
+	}
+
+	public void setBookId(int bookId) {
+		this.bookId = bookId;
+	}
+
+	public String getBookName() {
+		return bookName;
+	}
+
+	public void setBookName(String bookName) {
+		this.bookName = bookName;
+	}
+
+	@Override
+	public String toString() {
+		return "Book [bookId=" + bookId + ", bookName=" + bookName + "]";
+	}
+}
+
+class BookShop implements Cloneable {
+	private String shopName;
+	List<Book> books = new ArrayList();
+
+	public String getShopName() {
+		return shopName;
+	}
+
+	public void setShopName(String shopName) {
+		this.shopName = shopName;
+	}
+
+	public List<Book> getBooks() {
+		return books;
+	}
+
+	public void setBooks(List<Book> books) {
+		this.books = books;
+	}
+
+	@Override
+	public String toString() {
+		return "BookShop [shopName=" + shopName + ", books=" + books + "]";
+	}
+
+	public void loadData()
+	{
+		for (int i = 0; i < 10; i++) {
+			Book book = new Book();
+			book.setBookId(i);
+			book.setBookName("Book "+i);
+			getBooks().add(book);
+		}
+	}
+	
+	public BookShop clone()throws CloneNotSupportedException
+	{
+        BookShop shop = new BookShop();
+        
+        for(Book b:this.getBooks())
+        {
+        	shop.getBooks().add(b);
+        }
+        
+        return shop;
+     
+	}
+}
+
+public class CreationalPrototypeDesignFactory {
+
+	public static void main(String[] args) throws CloneNotSupportedException {
+		// TODO Auto-generated method stub
+        BookShop bs = new BookShop();
+        bs.setShopName("Navality");
+        bs.loadData();
+               
+        BookShop bs1 = bs.clone();
+        bs.getBooks().remove(2);
+        bs1.setShopName("A1");
+        
+        System.out.println(bs);
+        System.out.println(bs1);
+	}
+
+}
