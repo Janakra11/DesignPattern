@@ -22,7 +22,7 @@ abstract class Square {
 	}
 }
 
-class ShapeFactory {
+public class ShapeFactory {
 
 	// use getShape method to get object of type shape
 	public Shape getShape(String shapeType) {
