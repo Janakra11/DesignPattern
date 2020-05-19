@@ -1,0 +1,71 @@
+package com.pack.design.pattern;
+
+interface Shape {
+	void draw();
+}
+
+abstract class Circle implements shape {
+	public void draw() {
+		System.out.println("inside the circle class draw()method");
+	}
+}
+
+abstract class Rectangle {
+	public void draw() {
+		System.out.println("inside the retangle class draw()method");
+	}
+}
+
+abstract class Square {
+	public void draw() {
+		System.out.println("inside the square class draw()method");
+	}
+}
+
+class ShapeFactory {
+
+	// use getShape method to get object of type shape
+	public Shape getShape(String shapeType) {
+		if (shapeType == null) {
+			return null;
+		}
+		if (shapeType.equalsIgnoreCase("CIRCLE")) {
+			return new Circle();
+
+		} else if (shapeType.equalsIgnoreCase("RECTANGLE")) {
+			return new Rectangle();
+
+		} else if (shapeType.equalsIgnoreCase("SQUARE")) {
+			return new Square();
+		}
+
+		return null;
+	}
+}
+
+public class CreationalFactoryDesignPattern {
+//creational design pattern to create an object using factory class
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		ShapeFactory shapeFactory = new ShapeFactory();
+
+		// get an object of Circle and call its draw method.
+		Shape shape1 = shapeFactory.getShape("CIRCLE");
+
+		// call draw method of Circle
+		shape1.draw();
+
+		// get an object of Rectangle and call its draw method.
+		Shape shape2 = shapeFactory.getShape("RECTANGLE");
+
+		// call draw method of Rectangle
+		shape2.draw();
+
+		// get an object of Square and call its draw method.
+		Shape shape3 = shapeFactory.getShape("SQUARE");
+
+		// call draw method of square
+		shape3.draw();
+	}
+
+}
